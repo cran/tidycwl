@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Nan Xiao &lt;nan.xiao@sevenbridges.com&gt;" />
 
-<meta name="date" content="2019-11-22" />
+<meta name="date" content="2019-12-03" />
 
 <title>A Grammar for Tidying CWL Workflows</title>
 
@@ -5367,19 +5366,18 @@ HTMLWidgets.widget({
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -5399,7 +5397,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -5624,6 +5622,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -5657,7 +5656,7 @@ summary {
 
 <h1 class="title toc-ignore">A Grammar for Tidying CWL Workflows</h1>
 <h4 class="author">Nan Xiao &lt;<a href="mailto:nan.xiao@sevenbridges.com" class="email">nan.xiao@sevenbridges.com</a>&gt;</h4>
-<h4 class="date">2019-11-22</h4>
+<h4 class="date">2019-12-03</h4>
 
 </div>
 
@@ -5674,13 +5673,13 @@ summary {
 </div>
 
 <div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
+<h1 number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>The tidycwl package takes the raw Common Workflow Language (CWL) workflows encoded in JSON or YAML, and turns the workflow elements into tidy data frames or structured lists. This package follows the <a href="https://principles.tidyverse.org/">tidyverse design principles</a> and can be seamlessly used together with the other packages with similar designs.</p>
 <p>Let’s use a real-world example to see how we can read, parse, and visualize a bioinformatics workflow with tidycwl.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(<span class="st">&quot;tidycwl&quot;</span>)</span></code></pre></div>
 </div>
 <div id="read-workflow" class="section level1">
-<h1><span class="header-section-number">2</span> Read workflow</h1>
+<h1 number="2"><span class="header-section-number">2</span> Read workflow</h1>
 <p>To read a CWL workflow into R, use <code>read_cwl_json()</code>, <code>read_cwl_yaml()</code>, or <code>read_cwl(format = ...)</code> depending on the workflow storage format.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>flow &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;cwl/sbg/workflow/gatk4-wgs.json&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;tidycwl&quot;</span>) <span class="op">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="st">  </span><span class="kw">read_cwl_json</span>()</span>
@@ -5691,7 +5690,7 @@ CWL Version: sbg:draft-2 </code></pre>
 <p>We see the name, class (workflow or command line tool), and the version of the CWL. Currently, tidycwl supports both sbg:draft2 and v1.0 workflows. As the standard evolves, we plan to add the support for higher versions as needed.</p>
 </div>
 <div id="parse-workflow" class="section level1">
-<h1><span class="header-section-number">3</span> Parse workflow</h1>
+<h1 number="3"><span class="header-section-number">3</span> Parse workflow</h1>
 <p>After reading the workflow into R, let’s parse the main components from the CWL.</p>
 <p>Besides the type (<code>parse_type()</code>) and metadata (<code>parse_meta()</code>), we are more than interested in the core components of a workflow, namely, the inputs, outputs, and the intermediate steps.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>flow <span class="op">%&gt;%</span></span>
@@ -5713,7 +5712,7 @@ CWL Version: sbg:draft-2 </code></pre>
 <p>Depending on whether these components are represented as YAML/JSON dictionaries or lists in the workflow, the parsed results could be data frames or lists. This is because we want to keep the transformations for the original data minimal, at least at this stage. Plus, these results are not too useful compared to the following granular parsers.</p>
 </div>
 <div id="get-parameters" class="section level1">
-<h1><span class="header-section-number">4</span> Get parameters</h1>
+<h1 number="4"><span class="header-section-number">4</span> Get parameters</h1>
 <p>We can use the <code>get_*_*()</code> functions to get the critical parameters, such as the ID, label, or documentation from the parsed inputs, outputs, and steps. For example, use <code>get_steps_label()</code> to get the labels of the steps in the workflow:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>flow <span class="op">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">parse_steps</span>() <span class="op">%&gt;%</span></span>
@@ -5731,7 +5730,7 @@ CWL Version: sbg:draft-2 </code></pre>
 [21] &quot;GATK ApplyBQSR&quot;                      &quot;GATK BaseRecalibrator&quot;              </code></pre>
 </div>
 <div id="get-graph-elements" class="section level1">
-<h1><span class="header-section-number">5</span> Get graph elements</h1>
+<h1 number="5"><span class="header-section-number">5</span> Get graph elements</h1>
 <p>In many cases, it is useful to construct a graph with the parsed inputs, outputs, and steps from the workflow. The functions <code>get_nodes()</code> and <code>get_edges()</code> can help us tidy the graph nodes and edges into data frames. Each row represents a node or an edge, with each variable representing an attribute of the node or edge.</p>
 <p>The function <code>get_graph()</code> is a wrapper which returns everything in a list:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">get_graph</span>(</span>
@@ -5752,20 +5751,22 @@ CWL Version: sbg:draft-2 </code></pre>
   ..$ type     : chr [1:43] &quot;step_to_step&quot; &quot;step_to_step&quot; &quot;input_to_step&quot; &quot;step_to_step&quot; ...</code></pre>
 </div>
 <div id="visualize-workflow" class="section level1">
-<h1><span class="header-section-number">6</span> Visualize workflow</h1>
-<p>With tidycwl, we can visualize the workflow graph by calling <code>visualize_graph()</code>, which is built on the <code>visNetwork</code> package with an automatic hierarchical layout.:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">get_graph</span>(</span>
-<span id="cb14-2"><a href="#cb14-2"></a>  flow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_inputs</span>(),</span>
-<span id="cb14-3"><a href="#cb14-3"></a>  flow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_outputs</span>(),</span>
-<span id="cb14-4"><a href="#cb14-4"></a>  flow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_steps</span>()</span>
-<span id="cb14-5"><a href="#cb14-5"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">visualize_graph</span>()</span></code></pre></div>
-<div id="htmlwidget-2aa6066a1b7d1f8285e7" style="width:100%;height:600px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2aa6066a1b7d1f8285e7">{"x":{"nodes":{"id":["intervals_file","dbsnp","mills","fastq","reference","known_indels_1000g_bqsr","threads","memory_per_job","Genome_coverage","alignment_summary_metrics","aligned_reads","fastqc_report","gVCF","raw_vcf","SBG_Genome_Coverage","SBG_Untar_fasta","Sambamba_Merge","SBG_FASTQ_Quality_Adjuster","Tabix_Index","GATK_CollectAlignmentSummaryMetrics","SBG_Prepare_Intervals","FastQC","BWA_INDEX_1","SBG_Pair_FASTQs_by_Metadata","SBG_FASTA_Indices","Tabix_BGZIP","BWA_MEM_Bundle_0_7_17","GATK_HaplotypeCaller","GATK_IndexFeatureFile","GATK_IndexFeatureFile_1","GATK_IndexFeatureFile_2","GATK_MergeVcfs_1","GATK_GenotypeGVCFs","GATK_MergeVcfs","GATK_ApplyBQSR","GATK_BaseRecalibrator"],"label":["Target BED","dbsnp","Mills","Fastq","Reference or TAR with BWA reference indices","Known indels 1000g bqsr","Threads","Memory Per Job","Genome coverage","Alignment Summary Metrics","Aligned Reads","FastQC Report","gVCF","Raw VCF","SBG Genome Coverage","SBG Untar fasta","Sambamba Merge","SBG FASTQ Quality Adjuster","Tabix Index","GATK CollectAlignmentSummaryMetrics","SBG Prepare Intervals","FastQC","BWA INDEX 0.7.17","SBG Pair FASTQs by Metadata","SBG FASTA Indices","Tabix BGZIP","BWA MEM Bundle 0.7.17","GATK HaplotypeCaller","GATK IndexFeatureFile","GATK IndexFeatureFile","GATK IndexFeatureFile","GATK MergeVcfs","GATK GenotypeGVCFs","GATK MergeVcfs","GATK ApplyBQSR","GATK BaseRecalibrator"],"group":["input","input","input","input","input","input","input","input","output","output","output","output","output","output","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step"]},"edges":{"from":["SBG_FASTA_Indices","Sambamba_Merge","reference","BWA_MEM_Bundle_0_7_17","fastq","Tabix_BGZIP","SBG_FASTA_Indices","Sambamba_Merge","intervals_file","fastq","reference","SBG_FASTQ_Quality_Adjuster","SBG_Untar_fasta","GATK_MergeVcfs_1","threads","BWA_INDEX_1","SBG_Pair_FASTQs_by_Metadata","SBG_FASTA_Indices","GATK_ApplyBQSR","memory_per_job","SBG_Prepare_Intervals","GATK_IndexFeatureFile","dbsnp","mills","known_indels_1000g_bqsr","GATK_HaplotypeCaller","GATK_HaplotypeCaller","SBG_FASTA_Indices","GATK_GenotypeGVCFs","SBG_Prepare_Intervals","BWA_MEM_Bundle_0_7_17","GATK_BaseRecalibrator","SBG_FASTA_Indices","BWA_MEM_Bundle_0_7_17","GATK_IndexFeatureFile","GATK_IndexFeatureFile_2","GATK_IndexFeatureFile_1","SBG_Genome_Coverage","GATK_CollectAlignmentSummaryMetrics","Sambamba_Merge","FastQC","Tabix_Index","GATK_MergeVcfs"],"to":["SBG_Genome_Coverage","SBG_Genome_Coverage","SBG_Untar_fasta","Sambamba_Merge","SBG_FASTQ_Quality_Adjuster","Tabix_Index","GATK_CollectAlignmentSummaryMetrics","GATK_CollectAlignmentSummaryMetrics","SBG_Prepare_Intervals","FastQC","BWA_INDEX_1","SBG_Pair_FASTQs_by_Metadata","SBG_FASTA_Indices","Tabix_BGZIP","BWA_MEM_Bundle_0_7_17","BWA_MEM_Bundle_0_7_17","BWA_MEM_Bundle_0_7_17","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_IndexFeatureFile","GATK_IndexFeatureFile_1","GATK_IndexFeatureFile_2","GATK_MergeVcfs_1","GATK_GenotypeGVCFs","GATK_GenotypeGVCFs","GATK_MergeVcfs","GATK_ApplyBQSR","GATK_ApplyBQSR","GATK_ApplyBQSR","GATK_BaseRecalibrator","GATK_BaseRecalibrator","GATK_BaseRecalibrator","GATK_BaseRecalibrator","GATK_BaseRecalibrator","Genome_coverage","alignment_summary_metrics","aligned_reads","fastqc_report","gVCF","raw_vcf"],"port_from":["fasta_reference","merged_bam",null,"aligned_reads",null,"output_file","fasta_reference","merged_bam",null,null,null,"result","output_fasta","output",null,"indexed_reference","tuple_list","fasta_reference","output",null,"intervals","output_with_index",null,null,null,"output_vcf","output_vcf","fasta_reference","vcf","intervals","aligned_reads","recalibration_file","fasta_reference","aligned_reads","output_with_index","output_with_index","output_with_index","summary","summary_metrics","merged_bam","report_html","indexed_file","output"],"port_to":["fasta","bam","input_tar_with_reference","bams","fastq","input_file","REFERENCE_SEQUENCE","INPUT","bed_file","input_fastq","reference","fastq_list","reference","input_file","threads","reference_index_tar","input_reads","reference","reads","memory_per_job","intervals_file","db_snp","feature_file","feature_file","feature_file","input","variants","reference","input","intervals_file","input_bam","bqsr_recal_file","reference","reads","known_sites","known_sites","known_sites",null,null,null,null,null,null],"type":["step_to_step","step_to_step","input_to_step","step_to_step","input_to_step","step_to_step","step_to_step","step_to_step","input_to_step","input_to_step","input_to_step","step_to_step","step_to_step","step_to_step","input_to_step","step_to_step","step_to_step","step_to_step","step_to_step","input_to_step","step_to_step","step_to_step","input_to_step","input_to_step","input_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_output","step_to_output","step_to_output","step_to_output","step_to_output","step_to_output"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","borderWidth":2},"manipulation":{"enabled":false},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":0.5}},"smooth":{"type":"cubicBezier","roundness":0.6}},"groups":{"input":{"color":"#C3C3C3","shadow":{"enabled":true}},"output":{"color":"#FF8F00","shadow":{"enabled":true}},"useDefaultGroups":true,"step":{"color":"#00AAA8","shadow":{"enabled":true}}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":300,"direction":"LR","sortMethod":"directed"}}},"groups":["input","output","step"],"width":"100%","height":600,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<h1 number="6"><span class="header-section-number">6</span> Visualize workflow</h1>
+<p>With tidycwl, we can visualize the workflow graph by calling <code>visualize_graph()</code>, which is built on the <code>visNetwork</code> package with an automatic hierarchical layout:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="cf">if</span> (rmarkdown<span class="op">::</span><span class="kw">pandoc_available</span>(<span class="st">&quot;1.12.3&quot;</span>)) {</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="kw">get_graph</span>(</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    flow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_inputs</span>(),</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    flow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_outputs</span>(),</span>
+<span id="cb14-5"><a href="#cb14-5"></a>    flow <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">parse_steps</span>()</span>
+<span id="cb14-6"><a href="#cb14-6"></a>  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">visualize_graph</span>()</span>
+<span id="cb14-7"><a href="#cb14-7"></a>}</span></code></pre></div>
+<div id="htmlwidget-aacc5ba6294e9c05c338" style="width:100%;height:600px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aacc5ba6294e9c05c338">{"x":{"nodes":{"id":["intervals_file","dbsnp","mills","fastq","reference","known_indels_1000g_bqsr","threads","memory_per_job","Genome_coverage","alignment_summary_metrics","aligned_reads","fastqc_report","gVCF","raw_vcf","SBG_Genome_Coverage","SBG_Untar_fasta","Sambamba_Merge","SBG_FASTQ_Quality_Adjuster","Tabix_Index","GATK_CollectAlignmentSummaryMetrics","SBG_Prepare_Intervals","FastQC","BWA_INDEX_1","SBG_Pair_FASTQs_by_Metadata","SBG_FASTA_Indices","Tabix_BGZIP","BWA_MEM_Bundle_0_7_17","GATK_HaplotypeCaller","GATK_IndexFeatureFile","GATK_IndexFeatureFile_1","GATK_IndexFeatureFile_2","GATK_MergeVcfs_1","GATK_GenotypeGVCFs","GATK_MergeVcfs","GATK_ApplyBQSR","GATK_BaseRecalibrator"],"label":["Target BED","dbsnp","Mills","Fastq","Reference or TAR with BWA reference indices","Known indels 1000g bqsr","Threads","Memory Per Job","Genome coverage","Alignment Summary Metrics","Aligned Reads","FastQC Report","gVCF","Raw VCF","SBG Genome Coverage","SBG Untar fasta","Sambamba Merge","SBG FASTQ Quality Adjuster","Tabix Index","GATK CollectAlignmentSummaryMetrics","SBG Prepare Intervals","FastQC","BWA INDEX 0.7.17","SBG Pair FASTQs by Metadata","SBG FASTA Indices","Tabix BGZIP","BWA MEM Bundle 0.7.17","GATK HaplotypeCaller","GATK IndexFeatureFile","GATK IndexFeatureFile","GATK IndexFeatureFile","GATK MergeVcfs","GATK GenotypeGVCFs","GATK MergeVcfs","GATK ApplyBQSR","GATK BaseRecalibrator"],"group":["input","input","input","input","input","input","input","input","output","output","output","output","output","output","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step","step"]},"edges":{"from":["SBG_FASTA_Indices","Sambamba_Merge","reference","BWA_MEM_Bundle_0_7_17","fastq","Tabix_BGZIP","SBG_FASTA_Indices","Sambamba_Merge","intervals_file","fastq","reference","SBG_FASTQ_Quality_Adjuster","SBG_Untar_fasta","GATK_MergeVcfs_1","threads","BWA_INDEX_1","SBG_Pair_FASTQs_by_Metadata","SBG_FASTA_Indices","GATK_ApplyBQSR","memory_per_job","SBG_Prepare_Intervals","GATK_IndexFeatureFile","dbsnp","mills","known_indels_1000g_bqsr","GATK_HaplotypeCaller","GATK_HaplotypeCaller","SBG_FASTA_Indices","GATK_GenotypeGVCFs","SBG_Prepare_Intervals","BWA_MEM_Bundle_0_7_17","GATK_BaseRecalibrator","SBG_FASTA_Indices","BWA_MEM_Bundle_0_7_17","GATK_IndexFeatureFile","GATK_IndexFeatureFile_2","GATK_IndexFeatureFile_1","SBG_Genome_Coverage","GATK_CollectAlignmentSummaryMetrics","Sambamba_Merge","FastQC","Tabix_Index","GATK_MergeVcfs"],"to":["SBG_Genome_Coverage","SBG_Genome_Coverage","SBG_Untar_fasta","Sambamba_Merge","SBG_FASTQ_Quality_Adjuster","Tabix_Index","GATK_CollectAlignmentSummaryMetrics","GATK_CollectAlignmentSummaryMetrics","SBG_Prepare_Intervals","FastQC","BWA_INDEX_1","SBG_Pair_FASTQs_by_Metadata","SBG_FASTA_Indices","Tabix_BGZIP","BWA_MEM_Bundle_0_7_17","BWA_MEM_Bundle_0_7_17","BWA_MEM_Bundle_0_7_17","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_HaplotypeCaller","GATK_IndexFeatureFile","GATK_IndexFeatureFile_1","GATK_IndexFeatureFile_2","GATK_MergeVcfs_1","GATK_GenotypeGVCFs","GATK_GenotypeGVCFs","GATK_MergeVcfs","GATK_ApplyBQSR","GATK_ApplyBQSR","GATK_ApplyBQSR","GATK_BaseRecalibrator","GATK_BaseRecalibrator","GATK_BaseRecalibrator","GATK_BaseRecalibrator","GATK_BaseRecalibrator","Genome_coverage","alignment_summary_metrics","aligned_reads","fastqc_report","gVCF","raw_vcf"],"port_from":["fasta_reference","merged_bam",null,"aligned_reads",null,"output_file","fasta_reference","merged_bam",null,null,null,"result","output_fasta","output",null,"indexed_reference","tuple_list","fasta_reference","output",null,"intervals","output_with_index",null,null,null,"output_vcf","output_vcf","fasta_reference","vcf","intervals","aligned_reads","recalibration_file","fasta_reference","aligned_reads","output_with_index","output_with_index","output_with_index","summary","summary_metrics","merged_bam","report_html","indexed_file","output"],"port_to":["fasta","bam","input_tar_with_reference","bams","fastq","input_file","REFERENCE_SEQUENCE","INPUT","bed_file","input_fastq","reference","fastq_list","reference","input_file","threads","reference_index_tar","input_reads","reference","reads","memory_per_job","intervals_file","db_snp","feature_file","feature_file","feature_file","input","variants","reference","input","intervals_file","input_bam","bqsr_recal_file","reference","reads","known_sites","known_sites","known_sites",null,null,null,null,null,null],"type":["step_to_step","step_to_step","input_to_step","step_to_step","input_to_step","step_to_step","step_to_step","step_to_step","input_to_step","input_to_step","input_to_step","step_to_step","step_to_step","step_to_step","input_to_step","step_to_step","step_to_step","step_to_step","step_to_step","input_to_step","step_to_step","step_to_step","input_to_step","input_to_step","input_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_step","step_to_output","step_to_output","step_to_output","step_to_output","step_to_output","step_to_output"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","borderWidth":2},"manipulation":{"enabled":false},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":0.5}},"smooth":{"type":"cubicBezier","roundness":0.6}},"groups":{"input":{"color":"#C3C3C3","shadow":{"enabled":true}},"output":{"color":"#FF8F00","shadow":{"enabled":true}},"useDefaultGroups":true,"step":{"color":"#00AAA8","shadow":{"enabled":true}}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":300,"direction":"LR","sortMethod":"directed"}}},"groups":["input","output","step"],"width":"100%","height":600,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
 <p>Users can interact with the visualization by zooming in/out and dragging the view or nodes. The graphical details can be further fine-tuned by feeding additional parameters to <code>visualize_graph()</code>.</p>
 <p>The visualizations can be exported as HTML or static images (PNG/JPEG/PDF) with <code>export_html()</code> and <code>export_image()</code>.</p>
 </div>
 <div id="shiny-widget" class="section level1">
-<h1><span class="header-section-number">7</span> Shiny widget</h1>
+<h1 number="7"><span class="header-section-number">7</span> Shiny widget</h1>
 <p>The workflow visualizations can be directly embedded in Shiny apps by using the Shiny widget in tidycwl. Check out the documentation for <code>render_cwl()</code> and <code>cwl_output()</code> for an example app.</p>
 </div>
 

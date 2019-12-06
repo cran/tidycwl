@@ -34,10 +34,12 @@ get_graph(
   flow %>% parse_steps()
 ) %>% str()
 
-## -----------------------------------------------------------------------------
-get_graph(
-  flow %>% parse_inputs(),
-  flow %>% parse_outputs(),
-  flow %>% parse_steps()
-) %>% visualize_graph()
+## ---- screenshot.force=FALSE--------------------------------------------------
+if (rmarkdown::pandoc_available("1.12.3")) {
+  get_graph(
+    flow %>% parse_inputs(),
+    flow %>% parse_outputs(),
+    flow %>% parse_steps()
+  ) %>% visualize_graph()
+}
 

@@ -1,7 +1,7 @@
-60e38228b010ba8adbf03844fabe1ef4 *DESCRIPTION
+b4c43974b800bf92053e360afb3d25af *DESCRIPTION
 7f749dcdb71a79d393abf2884e7290c2 *NAMESPACE
-fd3f1e492ee8422ccde748d2909e9bcc *NEWS.md
-6bf63f977f5ff555a0dbe2f939ff7dd7 *R/export.R
+707e1a05ef535d7efb50a1fb00cfd24a *NEWS.md
+05c7615305278d4e48411a00170f5e9e *R/export.R
 3a309259ee5d743aa367c7d346eb0415 *R/get-graph.R
 53b1c8e47d5be1a9a97f70863945af65 *R/get-param.R
 e9b4d39a4695bcf62508256a6757c038 *R/parse.R
@@ -13,7 +13,7 @@ c17058430e4e119327a788caa83ed571 *R/utils-edges.R
 65cef5e0674056f6fc07dd2b3ca85c13 *R/utils-pipe.R
 7be8f7d4d7f08c34d8aeb937b9cdfc52 *R/utils.R
 e33513949e244e9ca3013786bc550b65 *R/visualize.R
-36c61ecc99a6d75492f6778f6bb8b34b *README.md
+da6378f053e2a8223d5761e6c9519b9a *README.md
 6d53f6084286b711c5e63a7240cd86fd *build/vignette.rds
 6f81d55d9a4f8380eea4720b6c7a0ff6 *inst/cwl/minimal/0.with.errors/cwl.errors.cwl
 49fc2551a717b919d664bae0f1f9f6d6 *inst/cwl/minimal/0.with.errors/yaml.errors.cwl
@@ -52,10 +52,10 @@ fad4ac3c433abc1a23be316743b988cd *inst/cwl/sbg/workflow/gatk4-wgs.json
 5a301fd88ad6110147c3f2e3b122e188 *inst/cwl/sbg/workflow/rnaseq-salmon.cwl
 b932d9d8c36d3c376bd6d6f1feb78bdd *inst/cwl/sbg/workflow/rnaseq-salmon.json
 98953b4f713196cb0bd4badc9359eb0b *inst/cwl/sbg/workflow/rnaseq-star.json
-a4101e07c063d9480ba680db416e864c *inst/doc/tidycwl.R
-39cf9c14848d4006049213fdd01f9bc3 *inst/doc/tidycwl.Rmd
-493263b006f16eed710338832c5c02f1 *inst/doc/tidycwl.html
-9d79d505391d14cca996c4490f0ecdb6 *man/export_html.Rd
+1a2472725f1175b457a311181ca2fbdf *inst/doc/tidycwl.R
+9689b7908dbfdff3c2a5eea87b01672f *inst/doc/tidycwl.Rmd
+e70a2fa890d4e7d5f8c1d3b07ca69902 *inst/doc/tidycwl.html
+6a7fd06a65bc013051e96684629d87cb *man/export_html.Rd
 c0da76ca97d525e79d6af926559fb32f *man/export_image.Rd
 bf36edebf52de764742d1667e6e12259 *man/get_cwl_version.Rd
 d0fc713c18c2653128fd400d8f11bd4f *man/get_edges.Rd
@@ -91,4 +91,4 @@ cc0cbe001c154194a7ac37115823eb0d *man/tidycwl-package.Rd
 1f856f46f974f710eede4bda9d230927 *man/tidycwl_shiny.Rd
 d1fefd0860e7cc1e559d7eaba7dff977 *man/visualize_graph.Rd
 3d295359e776c58bf31f6d65fc995209 *vignettes/custom.css
-39cf9c14848d4006049213fdd01f9bc3 *vignettes/tidycwl.Rmd
+9689b7908dbfdff3c2a5eea87b01672f *vignettes/tidycwl.Rmd
