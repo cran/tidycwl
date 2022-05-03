@@ -1,6 +1,6 @@
-91fb559085ea915f63a7fa63e3fb6f40 *DESCRIPTION
+93562312fddd0d4c0b01e75214ea97af *DESCRIPTION
 7f749dcdb71a79d393abf2884e7290c2 *NAMESPACE
-2b0db08ec067300a6a8e60fc32556d8e *NEWS.md
+bb9e6882e1ec04f7bf7b784ebea4f6ac *NEWS.md
 05c7615305278d4e48411a00170f5e9e *R/export.R
 7b8c67e4484e756cfa10f74a77d1a6a3 *R/get-graph.R
 53b1c8e47d5be1a9a97f70863945af65 *R/get-param.R
@@ -54,7 +54,7 @@ b932d9d8c36d3c376bd6d6f1feb78bdd *inst/cwl/sbg/workflow/rnaseq-salmon.json
 98953b4f713196cb0bd4badc9359eb0b *inst/cwl/sbg/workflow/rnaseq-star.json
 1a2472725f1175b457a311181ca2fbdf *inst/doc/tidycwl.R
 c0f08e9543e41932dbcf2837d86bcd72 *inst/doc/tidycwl.Rmd
-fe1392e7d5117221f339c5fcd22a8d55 *inst/doc/tidycwl.html
+7df9aa238f67f86e3397a0ec1bc6595f *inst/doc/tidycwl.html
 6a7fd06a65bc013051e96684629d87cb *man/export_html.Rd
 c0da76ca97d525e79d6af926559fb32f *man/export_image.Rd
 bf36edebf52de764742d1667e6e12259 *man/get_cwl_version.Rd
@@ -87,7 +87,7 @@ ef7f6afefd58242dd3c2289d53b13256 *man/parse_steps.Rd
 e0c7134032fba45343beaa0265747def *man/read_cwl.Rd
 462d38ea00b44f5cb21069d19c0def2a *man/read_cwl_json.Rd
 843343a50cf94cf697a08ad3b583561b *man/read_cwl_yaml.Rd
-cd94e652dc8f6970099dde4d2721b042 *man/tidycwl-package.Rd
+85d2c0854c0876d2088db71e33610d12 *man/tidycwl-package.Rd
 1f856f46f974f710eede4bda9d230927 *man/tidycwl_shiny.Rd
 d1fefd0860e7cc1e559d7eaba7dff977 *man/visualize_graph.Rd
 3d295359e776c58bf31f6d65fc995209 *vignettes/custom.css
